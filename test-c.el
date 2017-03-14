@@ -69,6 +69,12 @@
   :group 'processes
   :group 'c)
 
+(define-minor-mode test-c-mode nil
+  :lighter " test-c"
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-c C-c") 'test-c)
+            map))
+
 (defcustom test-c-default-compile-command "gcc -std=c11 -Wall $src -o $exe"
   "Default compile command to use"
   :group 'test-c)
@@ -148,6 +154,7 @@ int main(int argc, char **argv)
       (test-c-set-var "run" test-c-default-run-command)
       (test-c-set-var "compile" test-c-default-compile-command)
       (c-mode)
+      (test-c-mode)
       (indent-region (point-min) (point-max))
       (goto-char (point-min))
       (search-forward "{" nil t)))

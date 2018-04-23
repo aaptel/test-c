@@ -145,7 +145,7 @@ int main(int argc, char **argv)
 (defun test-c (new-buffer)
   "Compile and run a new test-c buffer (or reuse existing one)."
   (interactive "P")
-  (when (not test-c-buffer)
+  (when (not (bound-and-true-p test-c-mode))
     (switch-to-buffer (get-buffer-create "*test-c*"))
     (when (string= (buffer-string) "")
       (erase-buffer)
